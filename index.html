@@ -1,0 +1,466 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Product Copilot</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar">
+        <div class="brand">
+          <div class="brand-mark">PC</div>
+          <div>
+            <h1>Product Copilot</h1>
+            <p>AI workspace for signal → decision → delivery</p>
+          </div>
+        </div>
+        <nav class="nav">
+          <button class="nav-link active" data-view="dashboard">Dashboard</button>
+          <button class="nav-link" data-view="sources">Sources</button>
+          <button class="nav-link" data-view="ask">Ask</button>
+          <button class="nav-link" data-view="insights">Insight Cards</button>
+          <button class="nav-link" data-view="hypotheses">Discovery Backlog</button>
+          <button class="nav-link" data-view="prd">PRD Builder</button>
+          <button class="nav-link" data-view="status">Status & Reports</button>
+        </nav>
+        <div class="role-card">
+          <p class="label">Role</p>
+          <div class="role">PM / Editor</div>
+          <p class="muted">Audit trail enabled · Citations-only mode</p>
+        </div>
+      </aside>
+
+      <main class="main">
+        <header class="topbar">
+          <div>
+            <h2 id="view-title">Workspace dashboard</h2>
+            <p id="view-subtitle">
+              Track the newest insights, top risks, and active initiatives.
+            </p>
+          </div>
+          <div class="topbar-actions">
+            <button class="ghost">Add source</button>
+            <button class="primary">New decision</button>
+          </div>
+        </header>
+
+        <section class="view active" id="dashboard">
+          <div class="grid">
+            <div class="card">
+              <h3>Recent updates</h3>
+              <ul class="timeline">
+                <li>
+                  <span class="tag">Insight</span>
+                  Checkout drop-offs linked to shipping ambiguity.
+                  <span class="meta">Today · 3 sources</span>
+                </li>
+                <li>
+                  <span class="tag">Decision</span>
+                  Prioritize regional shipping estimator experiment.
+                  <span class="meta">Yesterday · Owner: Lena</span>
+                </li>
+                <li>
+                  <span class="tag">PRD</span>
+                  Draft v2 ready for review — Mobile checkout.
+                  <span class="meta">2 days ago</span>
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Top risks & asks</h3>
+              <ul class="risk-list">
+                <li>
+                  <strong>Data coverage gap</strong>
+                  <p>Need Android session replay before experiment launch.</p>
+                  <span class="pill warn">Ask</span>
+                </li>
+                <li>
+                  <strong>Experiment guardrail</strong>
+                  <p>Track cancelations to avoid revenue dip.</p>
+                  <span class="pill">Risk</span>
+                </li>
+              </ul>
+            </div>
+            <div class="card">
+              <h3>Initiative health</h3>
+              <div class="progress">
+                <div>
+                  <p>Discovery</p>
+                  <span>3 active</span>
+                </div>
+                <div class="bar">
+                  <div class="fill" style="width: 65%"></div>
+                </div>
+                <div>
+                  <p>Delivery</p>
+                  <span>2 shipping</span>
+                </div>
+                <div class="bar">
+                  <div class="fill" style="width: 40%"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="grid two">
+            <div class="card">
+              <h3>Weekly status snapshot</h3>
+              <div class="status-preview">
+                <p><strong>Highlights:</strong> Checkout clarity experiment cleared legal.</p>
+                <p><strong>Risks & asks:</strong> Need pricing analyst for guardrails.</p>
+                <p><strong>Next steps:</strong> Launch A/B by Friday, update PRD.</p>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Decision log</h3>
+              <div class="decision">
+                <p class="decision-title">Regional shipping estimator experiment</p>
+                <p class="decision-meta">Owner: Lena · Review: Oct 12</p>
+                <p class="decision-note">
+                  Rationale: strong evidence across 5 studies; mitigated risk with
+                  guardrails.
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="sources">
+          <div class="grid two">
+            <div class="card">
+              <h3>Ingestion channels</h3>
+              <div class="channels">
+                <div class="channel">
+                  <p>File uploads</p>
+                  <span>PDF · DOCX · CSV</span>
+                </div>
+                <div class="channel">
+                  <p>Paste notes / URLs</p>
+                  <span>Meeting notes, docs, links</span>
+                </div>
+                <div class="channel">
+                  <p>Notion integration</p>
+                  <span>Synced daily</span>
+                </div>
+              </div>
+              <button class="primary full">Upload new source</button>
+            </div>
+            <div class="card">
+              <h3>Metadata & tags</h3>
+              <div class="tag-grid">
+                <span class="pill">Segment: Power buyers</span>
+                <span class="pill">Platform: iOS</span>
+                <span class="pill">Issue: Checkout</span>
+                <span class="pill">Signal: Strong</span>
+                <span class="pill">Area: Payments</span>
+              </div>
+              <p class="muted">
+                Citations-only mode enabled — no answers without sources.
+              </p>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Sources library</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Source</th>
+                  <th>Type</th>
+                  <th>Date</th>
+                  <th>Owner</th>
+                  <th>Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Checkout interviews (Q3)</td>
+                  <td>Transcript</td>
+                  <td>Sep 12</td>
+                  <td>R. Patel</td>
+                  <td><span class="pill">Indexed</span></td>
+                </tr>
+                <tr>
+                  <td>Support ticket export</td>
+                  <td>CSV</td>
+                  <td>Sep 10</td>
+                  <td>M. Singh</td>
+                  <td><span class="pill">Indexed</span></td>
+                </tr>
+                <tr>
+                  <td>Payments FAQ (Notion)</td>
+                  <td>Doc</td>
+                  <td>Sep 05</td>
+                  <td>Team</td>
+                  <td><span class="pill warn">Needs review</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+
+        <section class="view" id="ask">
+          <div class="grid two">
+            <div class="card">
+              <h3>Ask a question</h3>
+              <textarea
+                id="question-input"
+                placeholder="Ask about user pain points, evidence, or opportunity size..."
+              ></textarea>
+              <button class="primary" id="ask-button">Generate answer</button>
+              <p class="muted">If sources are missing, the copilot says “I don’t know.”</p>
+            </div>
+            <div class="card" id="answer-card">
+              <h3>Answer with citations</h3>
+              <p class="answer" id="answer-text">
+                The highest friction appears in shipping clarity for first-time buyers,
+                especially on mobile.
+              </p>
+              <div class="citations">
+                <div class="citation">
+                  <span>Interview 12 · Sep 12 · R. Patel</span>
+                  <a href="#">Source link</a>
+                </div>
+                <div class="citation">
+                  <span>Support tickets · Sep 10 · M. Singh</span>
+                  <a href="#">Source link</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="insights">
+          <div class="grid two">
+            <div class="card">
+              <h3>Insight card (AI draft)</h3>
+              <div class="form-block">
+                <label>Problem</label>
+                <p>Mobile users abandon checkout when shipping costs are unclear.</p>
+              </div>
+              <div class="form-block">
+                <label>Who it affects</label>
+                <p>First-time buyers on iOS in APAC.</p>
+              </div>
+              <div class="form-block">
+                <label>Evidence</label>
+                <p>“I didn’t know the delivery fee until the last step.”</p>
+              </div>
+              <div class="form-block">
+                <label>Signal strength</label>
+                <p>Strong · 5 sources</p>
+              </div>
+              <div class="action-row">
+                <button class="ghost">Edit</button>
+                <button class="primary">Approve insight</button>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Open questions & risks</h3>
+              <ul class="bullet">
+                <li>Is pricing sensitivity higher in APAC than EU?</li>
+                <li>Do we need different guardrails for returning users?</li>
+                <li>What happens to margin if we show estimates earlier?</li>
+              </ul>
+              <div class="risk-callout">
+                <p>Suggested opportunities</p>
+                <span>Surface shipping estimator pre-checkout</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Insight cards list</h3>
+            <div class="insight-list">
+              <div>
+                <p class="title">Shipping clarity confusion</p>
+                <span class="meta">Impact: High · Confidence: High</span>
+              </div>
+              <div>
+                <p class="title">Promo code discoverability</p>
+                <span class="meta">Impact: Medium · Confidence: Medium</span>
+              </div>
+              <div>
+                <p class="title">Wallet trust signals</p>
+                <span class="meta">Impact: Medium · Confidence: Low</span>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="hypotheses">
+          <div class="grid two">
+            <div class="card">
+              <h3>Hypothesis generator</h3>
+              <p class="hypothesis">
+                If we show a shipping estimator before checkout, then first-time
+                buyers in APAC will increase completed orders by 8% within 6 weeks,
+                because it removes fee uncertainty.
+              </p>
+              <div class="form-block">
+                <label>Success metric</label>
+                <p>Checkout completion rate</p>
+              </div>
+              <div class="form-block">
+                <label>Guardrails</label>
+                <p>Refund rate, margin impact</p>
+              </div>
+              <div class="form-block">
+                <label>Assumptions</label>
+                <p>Estimator accuracy within ±5%</p>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Discovery backlog (RICE)</h3>
+              <table>
+                <thead>
+                  <tr>
+                    <th>Experiment</th>
+                    <th>Reach</th>
+                    <th>Impact</th>
+                    <th>Confidence</th>
+                    <th>Effort</th>
+                    <th>Score</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <td>Shipping estimator pre-checkout</td>
+                    <td>8</td>
+                    <td>7</td>
+                    <td>6</td>
+                    <td>4</td>
+                    <td>84</td>
+                  </tr>
+                  <tr>
+                    <td>Promo code inline hint</td>
+                    <td>5</td>
+                    <td>4</td>
+                    <td>5</td>
+                    <td>3</td>
+                    <td>33</td>
+                  </tr>
+                  <tr>
+                    <td>Wallet trust badge</td>
+                    <td>4</td>
+                    <td>3</td>
+                    <td>4</td>
+                    <td>2</td>
+                    <td>24</td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Initiative comparison</h3>
+            <div class="comparison">
+              <div>
+                <p class="title">Shipping estimator</p>
+                <p>Higher confidence due to consistent evidence.</p>
+                <p class="muted">Key risk: pricing perception</p>
+              </div>
+              <div>
+                <p class="title">Promo code hint</p>
+                <p>Lower impact, but fast to ship.</p>
+                <p class="muted">Key risk: discount expectations</p>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" id="prd">
+          <div class="grid two">
+            <div class="card">
+              <h3>PRD draft</h3>
+              <div class="prd-block">
+                <p><strong>Goal</strong>: Reduce checkout drop-offs for new buyers.</p>
+                <p><strong>Non-goals</strong>: Pricing engine overhaul.</p>
+                <p>
+                  <strong>Scope</strong>: Shipping estimator module, iOS and Android.
+                </p>
+                <p>
+                  <strong>User journey</strong>: Browse → Cart → Estimator → Checkout.
+                </p>
+              </div>
+            </div>
+            <div class="card">
+              <h3>Tracking & rollout plan</h3>
+              <div class="prd-block">
+                <p><strong>Success metrics</strong>: +8% checkout completion.</p>
+                <p><strong>Guardrails</strong>: Margin impact & refund rate.</p>
+                <p>
+                  <strong>Rollout</strong>: Feature flag, 20% → 50% → 100% with stop
+                  rules.
+                </p>
+              </div>
+              <button class="primary full">Export PRD</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Ticket generator</h3>
+            <div class="ticket">
+              <p><strong>Epic</strong>: Shipping estimator MVP</p>
+              <p><strong>User story</strong>: As a new buyer, I want an early estimate...</p>
+              <p><strong>Acceptance criteria</strong>: Estimator renders pre-checkout.</p>
+            </div>
+            <button class="ghost">Copy Jira-ready format</button>
+          </div>
+        </section>
+
+        <section class="view" id="status">
+          <div class="grid two">
+            <div class="card">
+              <h3>Weekly status generator</h3>
+              <div class="status-options">
+                <button class="chip active" data-status="executive">Executive</button>
+                <button class="chip" data-status="stakeholder">Stakeholder</button>
+                <button class="chip" data-status="team">Team</button>
+              </div>
+              <div class="status-output" id="status-output"></div>
+            </div>
+            <div class="card">
+              <h3>Experiment summary</h3>
+              <div class="summary">
+                <p><strong>Result</strong>: +6.5% completion lift.</p>
+                <p><strong>Guardrails</strong>: No margin regression.</p>
+                <p><strong>Recommendation</strong>: Rollout to 100%.</p>
+                <p><strong>Next</strong>: Update decision log and PRD.</p>
+              </div>
+              <button class="primary full">Share summary</button>
+            </div>
+          </div>
+
+          <div class="card">
+            <h3>Status history</h3>
+            <div class="history">
+              <div>
+                <p class="title">Week of Sep 16</p>
+                <span class="meta">Executive · Sent</span>
+              </div>
+              <div>
+                <p class="title">Week of Sep 09</p>
+                <span class="meta">Stakeholder · Sent</span>
+              </div>
+              <div>
+                <p class="title">Week of Sep 02</p>
+                <span class="meta">Team · Draft</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script src="app.js"></script>
+  </body>
+</html>
