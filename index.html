@@ -1,466 +1,174 @@
 <!doctype html>
-<html lang="en">
+<html lang="pl">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Product Copilot</title>
-    <link rel="stylesheet" href="styles.css" />
+    <meta name="theme-color" content="#f8faf7" />
+    <title>Sprout — Rodzinne rutyny</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Fredoka:wght@500;600&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
   </head>
   <body>
     <div class="app-shell">
-      <aside class="sidebar">
-        <div class="brand">
-          <div class="brand-mark">PC</div>
-          <div>
-            <h1>Product Copilot</h1>
-            <p>AI workspace for signal → decision → delivery</p>
-          </div>
-        </div>
+      <aside class="sidebar" aria-label="Główna nawigacja">
+        <a class="brand" href="#" aria-label="Sprout — strona główna">
+          <span class="brand-mark" aria-hidden="true">✦</span><span>sprout</span>
+        </a>
+
         <nav class="nav">
-          <button class="nav-link active" data-view="dashboard">Dashboard</button>
-          <button class="nav-link" data-view="sources">Sources</button>
-          <button class="nav-link" data-view="ask">Ask</button>
-          <button class="nav-link" data-view="insights">Insight Cards</button>
-          <button class="nav-link" data-view="hypotheses">Discovery Backlog</button>
-          <button class="nav-link" data-view="prd">PRD Builder</button>
-          <button class="nav-link" data-view="status">Status & Reports</button>
+          <button class="nav-link active" data-view="today"><span>⌂</span>Dzisiaj</button>
+          <button class="nav-link" data-view="routines"><span>☑</span>Rutyny</button>
+          <button class="nav-link" data-view="calendar"><span>▦</span>Kalendarz</button>
+          <button class="nav-link" data-view="badges"><span>◇</span>Odznaki</button>
+          <button class="nav-link" data-view="family"><span>♧</span>Rodzina</button>
         </nav>
-        <div class="role-card">
-          <p class="label">Role</p>
-          <div class="role">PM / Editor</div>
-          <p class="muted">Audit trail enabled · Citations-only mode</p>
+
+        <div class="sidebar-bottom">
+          <button class="nav-link"><span>⚙</span>Ustawienia</button>
+          <button class="profile-mini" aria-label="Otwórz profil">
+            <span class="avatar parent">AK</span>
+            <span><strong>Anna Kowalska</strong><small>Rodzic</small></span>
+            <span class="chevron">⌄</span>
+          </button>
         </div>
       </aside>
 
-      <main class="main">
+      <main>
         <header class="topbar">
-          <div>
-            <h2 id="view-title">Workspace dashboard</h2>
-            <p id="view-subtitle">
-              Track the newest insights, top risks, and active initiatives.
-            </p>
-          </div>
-          <div class="topbar-actions">
-            <button class="ghost">Add source</button>
-            <button class="primary">New decision</button>
+          <button class="mobile-menu" aria-label="Otwórz menu">☰</button>
+          <div class="date-chip"><span>◷</span><strong>Wtorek, 22 września</strong></div>
+          <div class="top-actions">
+            <button class="icon-button" aria-label="Powiadomienia"><span>♢</span><i>3</i></button>
+            <button class="primary small" data-open-modal><span>＋</span> Dodaj zadanie</button>
           </div>
         </header>
 
-        <section class="view active" id="dashboard">
-          <div class="grid">
-            <div class="card">
-              <h3>Recent updates</h3>
-              <ul class="timeline">
-                <li>
-                  <span class="tag">Insight</span>
-                  Checkout drop-offs linked to shipping ambiguity.
-                  <span class="meta">Today · 3 sources</span>
-                </li>
-                <li>
-                  <span class="tag">Decision</span>
-                  Prioritize regional shipping estimator experiment.
-                  <span class="meta">Yesterday · Owner: Lena</span>
-                </li>
-                <li>
-                  <span class="tag">PRD</span>
-                  Draft v2 ready for review — Mobile checkout.
-                  <span class="meta">2 days ago</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>Top risks & asks</h3>
-              <ul class="risk-list">
-                <li>
-                  <strong>Data coverage gap</strong>
-                  <p>Need Android session replay before experiment launch.</p>
-                  <span class="pill warn">Ask</span>
-                </li>
-                <li>
-                  <strong>Experiment guardrail</strong>
-                  <p>Track cancelations to avoid revenue dip.</p>
-                  <span class="pill">Risk</span>
-                </li>
-              </ul>
-            </div>
-            <div class="card">
-              <h3>Initiative health</h3>
-              <div class="progress">
-                <div>
-                  <p>Discovery</p>
-                  <span>3 active</span>
-                </div>
-                <div class="bar">
-                  <div class="fill" style="width: 65%"></div>
-                </div>
-                <div>
-                  <p>Delivery</p>
-                  <span>2 shipping</span>
-                </div>
-                <div class="bar">
-                  <div class="fill" style="width: 40%"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="grid two">
-            <div class="card">
-              <h3>Weekly status snapshot</h3>
-              <div class="status-preview">
-                <p><strong>Highlights:</strong> Checkout clarity experiment cleared legal.</p>
-                <p><strong>Risks & asks:</strong> Need pricing analyst for guardrails.</p>
-                <p><strong>Next steps:</strong> Launch A/B by Friday, update PRD.</p>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Decision log</h3>
-              <div class="decision">
-                <p class="decision-title">Regional shipping estimator experiment</p>
-                <p class="decision-meta">Owner: Lena · Review: Oct 12</p>
-                <p class="decision-note">
-                  Rationale: strong evidence across 5 studies; mitigated risk with
-                  guardrails.
-                </p>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="view" id="sources">
-          <div class="grid two">
-            <div class="card">
-              <h3>Ingestion channels</h3>
-              <div class="channels">
-                <div class="channel">
-                  <p>File uploads</p>
-                  <span>PDF · DOCX · CSV</span>
-                </div>
-                <div class="channel">
-                  <p>Paste notes / URLs</p>
-                  <span>Meeting notes, docs, links</span>
-                </div>
-                <div class="channel">
-                  <p>Notion integration</p>
-                  <span>Synced daily</span>
-                </div>
-              </div>
-              <button class="primary full">Upload new source</button>
-            </div>
-            <div class="card">
-              <h3>Metadata & tags</h3>
-              <div class="tag-grid">
-                <span class="pill">Segment: Power buyers</span>
-                <span class="pill">Platform: iOS</span>
-                <span class="pill">Issue: Checkout</span>
-                <span class="pill">Signal: Strong</span>
-                <span class="pill">Area: Payments</span>
-              </div>
-              <p class="muted">
-                Citations-only mode enabled — no answers without sources.
-              </p>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Sources library</h3>
-            <table>
-              <thead>
-                <tr>
-                  <th>Source</th>
-                  <th>Type</th>
-                  <th>Date</th>
-                  <th>Owner</th>
-                  <th>Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>Checkout interviews (Q3)</td>
-                  <td>Transcript</td>
-                  <td>Sep 12</td>
-                  <td>R. Patel</td>
-                  <td><span class="pill">Indexed</span></td>
-                </tr>
-                <tr>
-                  <td>Support ticket export</td>
-                  <td>CSV</td>
-                  <td>Sep 10</td>
-                  <td>M. Singh</td>
-                  <td><span class="pill">Indexed</span></td>
-                </tr>
-                <tr>
-                  <td>Payments FAQ (Notion)</td>
-                  <td>Doc</td>
-                  <td>Sep 05</td>
-                  <td>Team</td>
-                  <td><span class="pill warn">Needs review</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-        </section>
-
-        <section class="view" id="ask">
-          <div class="grid two">
-            <div class="card">
-              <h3>Ask a question</h3>
-              <textarea
-                id="question-input"
-                placeholder="Ask about user pain points, evidence, or opportunity size..."
-              ></textarea>
-              <button class="primary" id="ask-button">Generate answer</button>
-              <p class="muted">If sources are missing, the copilot says “I don’t know.”</p>
-            </div>
-            <div class="card" id="answer-card">
-              <h3>Answer with citations</h3>
-              <p class="answer" id="answer-text">
-                The highest friction appears in shipping clarity for first-time buyers,
-                especially on mobile.
-              </p>
-              <div class="citations">
-                <div class="citation">
-                  <span>Interview 12 · Sep 12 · R. Patel</span>
-                  <a href="#">Source link</a>
-                </div>
-                <div class="citation">
-                  <span>Support tickets · Sep 10 · M. Singh</span>
-                  <a href="#">Source link</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
-        <section class="view" id="insights">
-          <div class="grid two">
-            <div class="card">
-              <h3>Insight card (AI draft)</h3>
-              <div class="form-block">
-                <label>Problem</label>
-                <p>Mobile users abandon checkout when shipping costs are unclear.</p>
-              </div>
-              <div class="form-block">
-                <label>Who it affects</label>
-                <p>First-time buyers on iOS in APAC.</p>
-              </div>
-              <div class="form-block">
-                <label>Evidence</label>
-                <p>“I didn’t know the delivery fee until the last step.”</p>
-              </div>
-              <div class="form-block">
-                <label>Signal strength</label>
-                <p>Strong · 5 sources</p>
-              </div>
-              <div class="action-row">
-                <button class="ghost">Edit</button>
-                <button class="primary">Approve insight</button>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Open questions & risks</h3>
-              <ul class="bullet">
-                <li>Is pricing sensitivity higher in APAC than EU?</li>
-                <li>Do we need different guardrails for returning users?</li>
-                <li>What happens to margin if we show estimates earlier?</li>
-              </ul>
-              <div class="risk-callout">
-                <p>Suggested opportunities</p>
-                <span>Surface shipping estimator pre-checkout</span>
-              </div>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Insight cards list</h3>
-            <div class="insight-list">
+        <div class="content">
+          <section class="view active" id="today">
+            <div class="welcome-row">
               <div>
-                <p class="title">Shipping clarity confusion</p>
-                <span class="meta">Impact: High · Confidence: High</span>
+                <p class="eyebrow">PANEL RODZICA</p>
+                <h1>Dzień dobry, Aniu <span>👋</span></h1>
+                <p class="lead">Zosia świetnie sobie dziś radzi. Zostały jej tylko 2 zadania!</p>
               </div>
-              <div>
-                <p class="title">Promo code discoverability</p>
-                <span class="meta">Impact: Medium · Confidence: Medium</span>
-              </div>
-              <div>
-                <p class="title">Wallet trust signals</p>
-                <span class="meta">Impact: Medium · Confidence: Low</span>
+              <div class="child-picker">
+                <span class="avatar child">Z</span>
+                <span><small>Podopieczny</small><strong>Zosia</strong></span>
+                <span>⌄</span>
               </div>
             </div>
-          </div>
-        </section>
 
-        <section class="view" id="hypotheses">
-          <div class="grid two">
-            <div class="card">
-              <h3>Hypothesis generator</h3>
-              <p class="hypothesis">
-                If we show a shipping estimator before checkout, then first-time
-                buyers in APAC will increase completed orders by 8% within 6 weeks,
-                because it removes fee uncertainty.
-              </p>
-              <div class="form-block">
-                <label>Success metric</label>
-                <p>Checkout completion rate</p>
-              </div>
-              <div class="form-block">
-                <label>Guardrails</label>
-                <p>Refund rate, margin impact</p>
-              </div>
-              <div class="form-block">
-                <label>Assumptions</label>
-                <p>Estimator accuracy within ±5%</p>
-              </div>
+            <div class="stat-grid">
+              <article class="stat-card streak-card">
+                <div class="stat-icon flame">♨</div>
+                <div><p>Aktualna seria</p><strong>12 dni</strong><small>Najlepsza: 18 dni</small></div>
+                <span class="trend">↑ 3 dni</span>
+              </article>
+              <article class="stat-card">
+                <div class="stat-icon check">✓</div>
+                <div><p>Dzisiaj wykonane</p><strong>5 <em>/ 7</em></strong><small>71% dzisiejszego celu</small></div>
+                <div class="ring" style="--progress:71"><span>71%</span></div>
+              </article>
+              <article class="stat-card">
+                <div class="stat-icon star">★</div>
+                <div><p>Punkty w tym tygodniu</p><strong>240</strong><small>Jeszcze 60 do nagrody</small></div>
+                <span class="trend purple">+45 dziś</span>
+              </article>
+              <article class="stat-card">
+                <div class="stat-icon badge">◇</div>
+                <div><p>Zdobyte odznaki</p><strong>8</strong><small>2 blisko odblokowania</small></div>
+                <div class="mini-badges"><span>🌟</span><span>🌱</span><span>＋2</span></div>
+              </article>
             </div>
-            <div class="card">
-              <h3>Discovery backlog (RICE)</h3>
-              <table>
-                <thead>
-                  <tr>
-                    <th>Experiment</th>
-                    <th>Reach</th>
-                    <th>Impact</th>
-                    <th>Confidence</th>
-                    <th>Effort</th>
-                    <th>Score</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>Shipping estimator pre-checkout</td>
-                    <td>8</td>
-                    <td>7</td>
-                    <td>6</td>
-                    <td>4</td>
-                    <td>84</td>
-                  </tr>
-                  <tr>
-                    <td>Promo code inline hint</td>
-                    <td>5</td>
-                    <td>4</td>
-                    <td>5</td>
-                    <td>3</td>
-                    <td>33</td>
-                  </tr>
-                  <tr>
-                    <td>Wallet trust badge</td>
-                    <td>4</td>
-                    <td>3</td>
-                    <td>4</td>
-                    <td>2</td>
-                    <td>24</td>
-                  </tr>
-                </tbody>
-              </table>
-            </div>
-          </div>
 
-          <div class="card">
-            <h3>Initiative comparison</h3>
-            <div class="comparison">
-              <div>
-                <p class="title">Shipping estimator</p>
-                <p>Higher confidence due to consistent evidence.</p>
-                <p class="muted">Key risk: pricing perception</p>
-              </div>
-              <div>
-                <p class="title">Promo code hint</p>
-                <p>Lower impact, but fast to ship.</p>
-                <p class="muted">Key risk: discount expectations</p>
-              </div>
-            </div>
-          </div>
-        </section>
+            <div class="dashboard-grid">
+              <section class="panel tasks-panel">
+                <div class="panel-heading">
+                  <div><h2>Dzisiejsze zadania</h2><p>5 z 7 ukończonych</p></div>
+                  <button class="text-button" data-view-link="routines">Zobacz wszystkie <span>→</span></button>
+                </div>
+                <div class="progress-track"><span style="width:71%"></span></div>
+                <div class="task-list" id="task-list">
+                  <article class="task completed">
+                    <button class="task-check" aria-label="Oznacz jako niewykonane">✓</button>
+                    <span class="task-emoji mint">🛏️</span>
+                    <div class="task-copy"><strong>Pościel łóżko</strong><small>Rutyna poranna · do 8:00</small></div>
+                    <span class="points">+10 pkt</span><span class="status done">Gotowe</span>
+                  </article>
+                  <article class="task completed">
+                    <button class="task-check" aria-label="Oznacz jako niewykonane">✓</button>
+                    <span class="task-emoji blue">🪥</span>
+                    <div class="task-copy"><strong>Umyj zęby</strong><small>Rutyna poranna · do 8:00</small></div>
+                    <span class="points">+5 pkt</span><span class="status done">Gotowe</span>
+                  </article>
+                  <article class="task review">
+                    <button class="task-check" aria-label="Zatwierdź zadanie">⌛</button>
+                    <span class="task-emoji orange">🎒</span>
+                    <div class="task-copy"><strong>Spakuj plecak</strong><small>Dodano zdjęcie · 7:42</small></div>
+                    <span class="points">+15 pkt</span><button class="status waiting">Do akceptacji</button>
+                  </article>
+                  <article class="task">
+                    <button class="task-check" aria-label="Oznacz jako wykonane"></button>
+                    <span class="task-emoji lilac">📖</span>
+                    <div class="task-copy"><strong>Czytanie przez 20 minut</strong><small>Rutyna wieczorna · do 19:30</small></div>
+                    <span class="points">+15 pkt</span><span class="status todo">Do zrobienia</span>
+                  </article>
+                  <article class="task">
+                    <button class="task-check" aria-label="Oznacz jako wykonane"></button>
+                    <span class="task-emoji yellow">🧸</span>
+                    <div class="task-copy"><strong>Posprzątaj zabawki</strong><small>Rutyna wieczorna · do 20:00</small></div>
+                    <span class="points">+10 pkt</span><span class="status todo">Do zrobienia</span>
+                  </article>
+                </div>
+              </section>
 
-        <section class="view" id="prd">
-          <div class="grid two">
-            <div class="card">
-              <h3>PRD draft</h3>
-              <div class="prd-block">
-                <p><strong>Goal</strong>: Reduce checkout drop-offs for new buyers.</p>
-                <p><strong>Non-goals</strong>: Pricing engine overhaul.</p>
-                <p>
-                  <strong>Scope</strong>: Shipping estimator module, iOS and Android.
-                </p>
-                <p>
-                  <strong>User journey</strong>: Browse → Cart → Estimator → Checkout.
-                </p>
-              </div>
-            </div>
-            <div class="card">
-              <h3>Tracking & rollout plan</h3>
-              <div class="prd-block">
-                <p><strong>Success metrics</strong>: +8% checkout completion.</p>
-                <p><strong>Guardrails</strong>: Margin impact & refund rate.</p>
-                <p>
-                  <strong>Rollout</strong>: Feature flag, 20% → 50% → 100% with stop
-                  rules.
-                </p>
-              </div>
-              <button class="primary full">Export PRD</button>
-            </div>
-          </div>
+              <aside class="right-column">
+                <section class="panel weekly-panel">
+                  <div class="panel-heading"><div><h2>Ten tydzień</h2><p>Cel: 5 aktywnych dni</p></div><span class="week-score">4/5</span></div>
+                  <div class="week-days">
+                    <div class="day complete"><span>PN</span><b>✓</b><small>100%</small></div>
+                    <div class="day complete"><span>WT</span><b>✓</b><small>100%</small></div>
+                    <div class="day complete"><span>ŚR</span><b>✓</b><small>86%</small></div>
+                    <div class="day current"><span>CZ</span><b>22</b><small>71%</small></div>
+                    <div class="day"><span>PT</span><b>23</b><small>—</small></div>
+                    <div class="day weekend"><span>SO</span><b>24</b><small>—</small></div>
+                    <div class="day weekend"><span>ND</span><b>25</b><small>—</small></div>
+                  </div>
+                  <div class="comeback"><span>🔥</span><p><strong>Jeszcze jeden dzień!</strong><br />Zosia jest o krok od tygodniowego celu.</p></div>
+                </section>
 
-          <div class="card">
-            <h3>Ticket generator</h3>
-            <div class="ticket">
-              <p><strong>Epic</strong>: Shipping estimator MVP</p>
-              <p><strong>User story</strong>: As a new buyer, I want an early estimate...</p>
-              <p><strong>Acceptance criteria</strong>: Estimator renders pre-checkout.</p>
+                <section class="panel approval-panel">
+                  <div class="panel-heading"><div><h2>Do zatwierdzenia</h2><p>1 zadanie czeka na Ciebie</p></div><span class="counter">1</span></div>
+                  <div class="proof-card">
+                    <div class="proof-image" role="img" aria-label="Zdjęcie spakowanego plecaka"><span>🎒</span><small>Podgląd zdjęcia</small></div>
+                    <div class="proof-info"><strong>Spakuj plecak</strong><small>Dzisiaj, 7:42 · Zosia</small><div><button class="reject">✕</button><button class="approve">✓ Zatwierdź</button></div></div>
+                  </div>
+                </section>
+              </aside>
             </div>
-            <button class="ghost">Copy Jira-ready format</button>
-          </div>
-        </section>
+          </section>
 
-        <section class="view" id="status">
-          <div class="grid two">
-            <div class="card">
-              <h3>Weekly status generator</h3>
-              <div class="status-options">
-                <button class="chip active" data-status="executive">Executive</button>
-                <button class="chip" data-status="stakeholder">Stakeholder</button>
-                <button class="chip" data-status="team">Team</button>
-              </div>
-              <div class="status-output" id="status-output"></div>
-            </div>
-            <div class="card">
-              <h3>Experiment summary</h3>
-              <div class="summary">
-                <p><strong>Result</strong>: +6.5% completion lift.</p>
-                <p><strong>Guardrails</strong>: No margin regression.</p>
-                <p><strong>Recommendation</strong>: Rollout to 100%.</p>
-                <p><strong>Next</strong>: Update decision log and PRD.</p>
-              </div>
-              <button class="primary full">Share summary</button>
-            </div>
-          </div>
-
-          <div class="card">
-            <h3>Status history</h3>
-            <div class="history">
-              <div>
-                <p class="title">Week of Sep 16</p>
-                <span class="meta">Executive · Sent</span>
-              </div>
-              <div>
-                <p class="title">Week of Sep 09</p>
-                <span class="meta">Stakeholder · Sent</span>
-              </div>
-              <div>
-                <p class="title">Week of Sep 02</p>
-                <span class="meta">Team · Draft</span>
-              </div>
-            </div>
-          </div>
-        </section>
+          <section class="view placeholder-view" id="routines"><p class="eyebrow">ORGANIZACJA</p><h1>Rutyny Zosi</h1><p class="lead">Zarządzaj zadaniami, punktami i harmonogramem.</p><div class="empty-panel"><span>☑</span><h2>7 aktywnych rutyn</h2><p>Widok konfiguracji jest gotowy do połączenia z API.</p><button class="primary" data-open-modal>＋ Dodaj nową rutynę</button></div></section>
+          <section class="view placeholder-view" id="calendar"><p class="eyebrow">POSTĘPY</p><h1>Kalendarz aktywności</h1><p class="lead">Historia ukończenia i rodzinne serie w jednym miejscu.</p><div class="heatmap" aria-label="Mapa aktywności"><div class="heatmap-grid" id="heatmap"></div><div class="heatmap-key"><span>Mniej</span><i></i><i></i><i></i><i></i><span>Więcej</span></div></div></section>
+          <section class="view placeholder-view" id="badges"><p class="eyebrow">OSIĄGNIĘCIA</p><h1>Gablota odznak</h1><p class="lead">Każdy mały krok zasługuje na świętowanie.</p><div class="badge-grid"><article>🌅<strong>Poranny Ptak</strong><small>7 poranków z rzędu</small></article><article>🛏️<strong>Mistrz Czystości</strong><small>30 pościelonych łóżek</small></article><article>🦸<strong>Super Pomocnik</strong><small>10 zadań specjalnych</small></article><article class="locked">🏆<strong>Tygodniowy Tytan</strong><small>Jeszcze 1 dzień</small></article></div></section>
+          <section class="view placeholder-view" id="family"><p class="eyebrow">TWOJA RODZINA</p><h1>Profile rodzinne</h1><p class="lead">Bezpieczna przestrzeń dla wszystkich domowników.</p><div class="family-grid"><article><span class="avatar parent">AK</span><div><strong>Anna</strong><small>Rodzic · Administrator</small></div></article><article><span class="avatar child">Z</span><div><strong>Zosia</strong><small>Dziecko · 12 dni serii</small></div></article><button class="add-profile">＋ Dodaj profil</button></div></section>
+        </div>
       </main>
     </div>
+
+    <div class="modal-backdrop" id="task-modal" hidden>
+      <form class="modal" id="task-form">
+        <button type="button" class="modal-close" aria-label="Zamknij">×</button>
+        <p class="eyebrow">NOWA RUTYNA</p><h2>Dodaj zadanie</h2>
+        <label>Nazwa zadania<input name="title" required placeholder="np. Podlej kwiaty" /></label>
+        <div class="form-row"><label>Punkty<input name="points" type="number" min="1" value="10" /></label><label>Pora dnia<select name="time"><option>Rano</option><option>Po południu</option><option>Wieczorem</option></select></label></div>
+        <label class="toggle-row"><input name="proof" type="checkbox" /><span></span>Wymagaj zdjęcia do zatwierdzenia</label>
+        <button class="primary full" type="submit">Dodaj zadanie</button>
+      </form>
+    </div>
+    <div class="toast" role="status" aria-live="polite"></div>
     <script src="app.js"></script>
   </body>
 </html>

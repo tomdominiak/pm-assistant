@@ -1,118 +1,82 @@
-const viewTitle = document.getElementById("view-title");
-const viewSubtitle = document.getElementById("view-subtitle");
-const navLinks = document.querySelectorAll(".nav-link");
+const navLinks = document.querySelectorAll(".nav-link[data-view]");
 const views = document.querySelectorAll(".view");
+const sidebar = document.querySelector(".sidebar");
+const modal = document.getElementById("task-modal");
+const toast = document.querySelector(".toast");
 
-const viewCopy = {
-  dashboard: {
-    title: "Workspace dashboard",
-    subtitle: "Track the newest insights, top risks, and active initiatives.",
-  },
-  sources: {
-    title: "Sources & metadata",
-    subtitle: "Ingest knowledge, tag signals, and track citation coverage.",
-  },
-  ask: {
-    title: "Ask with citations",
-    subtitle: "Answers include source links, author, and date.",
-  },
-  insights: {
-    title: "Insight cards",
-    subtitle: "AI drafts; humans approve and enrich the evidence.",
-  },
-  hypotheses: {
-    title: "Discovery backlog",
-    subtitle: "Score hypotheses and compare initiatives with RICE.",
-  },
-  prd: {
-    title: "PRD builder",
-    subtitle: "Draft requirements from insights, decisions, and constraints.",
-  },
-  status: {
-    title: "Status & reporting",
-    subtitle: "Generate weekly updates with risks and asks.",
-  },
-};
+function showView(id) {
+  views.forEach((view) => view.classList.toggle("active", view.id === id));
+  navLinks.forEach((link) => link.classList.toggle("active", link.dataset.view === id));
+  sidebar.classList.remove("open");
+  window.scrollTo({ top: 0, behavior: "smooth" });
+}
 
-navLinks.forEach((link) => {
-  link.addEventListener("click", () => {
-    navLinks.forEach((item) => item.classList.remove("active"));
-    link.classList.add("active");
+navLinks.forEach((link) => link.addEventListener("click", () => showView(link.dataset.view)));
+document.querySelectorAll("[data-view-link]").forEach((link) =>
+  link.addEventListener("click", () => showView(link.dataset.viewLink)),
+);
+document.querySelector(".mobile-menu").addEventListener("click", () => sidebar.classList.toggle("open"));
 
-    const viewId = link.dataset.view;
-    views.forEach((view) => view.classList.remove("active"));
-    document.getElementById(viewId).classList.add("active");
+function notify(message) {
+  toast.textContent = message;
+  toast.classList.add("show");
+  window.setTimeout(() => toast.classList.remove("show"), 2600);
+}
 
-    viewTitle.textContent = viewCopy[viewId].title;
-    viewSubtitle.textContent = viewCopy[viewId].subtitle;
-  });
-});
-
-const askButton = document.getElementById("ask-button");
-const questionInput = document.getElementById("question-input");
-const answerText = document.getElementById("answer-text");
-const answerCard = document.getElementById("answer-card");
-
-const answerLibrary = [
-  {
-    query: "shipping",
-    answer:
-      "Shipping fee ambiguity is the most cited blocker for new mobile buyers.",
-    sources: [
-      "Interview 12 · Sep 12 · R. Patel",
-      "Support tickets · Sep 10 · M. Singh",
-    ],
-  },
-  {
-    query: "promo",
-    answer:
-      "Users notice the promo code field late, causing discount frustration.",
-    sources: [
-      "Usability test 7 · Sep 08 · UX Team",
-      "Session replay · Sep 06 · Analytics",
-    ],
-  },
-];
-
-askButton.addEventListener("click", () => {
-  const question = questionInput.value.toLowerCase();
-  const match = answerLibrary.find((item) => question.includes(item.query));
-
-  if (!match) {
-    answerText.textContent = "I don't know — no cited sources found.";
-    answerCard.querySelector(".citations").innerHTML = "";
-    return;
-  }
-
-  answerText.textContent = match.answer;
-  const citations = match.sources
-    .map(
-      (source) =>
-        `<div class="citation"><span>${source}</span><a href="#">Source link</a></div>`
-    )
-    .join("");
-  answerCard.querySelector(".citations").innerHTML = citations;
-});
-
-const statusOutput = document.getElementById("status-output");
-const statusButtons = document.querySelectorAll(".chip");
-
-const statusTemplates = {
-  executive:
-    "Highlights: Shipping estimator cleared legal. Decision log updated.\nRisks & Asks: Need analyst to monitor margin guardrails.\nNext: Launch 20% experiment and review weekly.",
-  stakeholder:
-    "Highlights: Discovery backlog reordered based on new evidence.\nRisks & Asks: Confirm estimator accuracy with ops team.\nNext: Share PRD v2 and align on rollout plan.",
-  team:
-    "Highlights: PRD draft ready, experiment instrumentation in progress.\nRisks & Asks: Data coverage gap on Android sessions.\nNext: Finish QA checklist, prep launch comms.",
-};
-
-statusOutput.textContent = statusTemplates.executive;
-
-statusButtons.forEach((button) => {
+document.querySelectorAll(".task-check").forEach((button) => {
   button.addEventListener("click", () => {
-    statusButtons.forEach((item) => item.classList.remove("active"));
-    button.classList.add("active");
-    const template = statusTemplates[button.dataset.status];
-    statusOutput.textContent = template;
+    const task = button.closest(".task");
+    const complete = task.classList.toggle("completed");
+    task.classList.remove("review");
+    button.textContent = complete ? "✓" : "";
+    const status = task.querySelector(".status");
+    if (status) {
+      status.textContent = complete ? "Gotowe" : "Do zrobienia";
+      status.className = `status ${complete ? "done" : "todo"}`;
+    }
+    notify(complete ? "Brawo! Zadanie oznaczone jako gotowe ✨" : "Zadanie wróciło na listę.");
   });
+});
+
+document.querySelector(".approve").addEventListener("click", () => {
+  document.querySelector(".approval-panel").innerHTML = '<div class="panel-heading"><div><h2>Do zatwierdzenia</h2><p>Wszystko sprawdzone!</p></div><span class="counter">✓</span></div><div class="comeback"><span>🌟</span><p><strong>Dobra robota!</strong><br>Zosia otrzymała 15 punktów.</p></div>';
+  const reviewTask = document.querySelector(".task.review");
+  reviewTask?.querySelector(".task-check").click();
+  notify("Zadanie zatwierdzone. Punkty przyznane!");
+});
+document.querySelector(".reject").addEventListener("click", () => notify("Poproś Zosię o ponowne wykonanie zadania."));
+
+document.querySelectorAll("[data-open-modal]").forEach((button) =>
+  button.addEventListener("click", () => {
+    modal.hidden = false;
+    modal.querySelector("input").focus();
+  }),
+);
+document.querySelector(".modal-close").addEventListener("click", () => (modal.hidden = true));
+modal.addEventListener("click", (event) => {
+  if (event.target === modal) modal.hidden = true;
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") modal.hidden = true;
+});
+document.getElementById("task-form").addEventListener("submit", (event) => {
+  event.preventDefault();
+  const data = new FormData(event.currentTarget);
+  const title = data.get("title");
+  const points = data.get("points");
+  const task = document.createElement("article");
+  task.className = "task";
+  task.innerHTML = `<button class="task-check" aria-label="Oznacz jako wykonane"></button><span class="task-emoji mint">🌱</span><div class="task-copy"><strong>${title.replace(/[<>]/g, "")}</strong><small>${data.get("time")} · Nowa rutyna</small></div><span class="points">+${points} pkt</span><span class="status todo">Do zrobienia</span>`;
+  document.getElementById("task-list").appendChild(task);
+  modal.hidden = true;
+  event.currentTarget.reset();
+  notify("Nowa rutyna została dodana 🌱");
+});
+
+const heatmap = document.getElementById("heatmap");
+Array.from({ length: 126 }, (_, index) => {
+  const cell = document.createElement("i");
+  const level = (index * 7 + index % 11) % 5;
+  if (level > 1) cell.className = `l${Math.min(level - 1, 3)}`;
+  heatmap.appendChild(cell);
 });
